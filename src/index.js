@@ -2,16 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+/*
+install packages redux & react-redux
+create store allows creation of store which is the global source of state
+Provider wraps the app and allows all components in the app access to the store
+All reducer brings in however many reducers have been defined
+*/
+import { createStore } from 'redux';
+import allReducer from './reducers';
+import { Provider } from 'react-redux'
+
+
+//line 20 added to enable Redux Chrome Dev tools extension
+const store = createStore(
+  allReducer, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>
+    ,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
